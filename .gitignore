@@ -21,9 +21,12 @@ __pycache__/
 # System
 .DS_Store
 
-# Environment files
+# Environment files (keep .env.example tracked)
 .env
-.env.*
+.env.local
+.env.production
+.env.staging
+.env.development
 
 # Backups
 backup-*.tar.gz

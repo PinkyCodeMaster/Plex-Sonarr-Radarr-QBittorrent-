@@ -45,6 +45,7 @@ sudo systemctl enable --now media-backup.timer
 - Rotate Sonarr, Radarr, and Prowlarr API keys via their UI, then update `.env` and restart the stack.
 - For Traefik dashboard auth, regenerate `htpasswd` values and update `compose/traefik/dynamic.yml`.
 - For VPN credentials, update `.env` and clear old configs under `${CONFIG_ROOT}/vpn`.
+- For Cloudflare + Nginx Proxy Manager, keep a DNS-API token with zone-edit-only permissions and rotate it in NPM/Traefik if you enable DNS challenges.
 
 ## Incident response
 - If a container is compromised, revoke exposed credentials, rotate API keys, and rebuild images.

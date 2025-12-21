@@ -42,3 +42,4 @@ failregex = ^<HOST> .+ \"(GET|POST).+ 401 .+
 - Keep qBittorrent bound to the `vpn` service (`network_mode: service:vpn`) and validate the VPN healthcheck before downloads resume.
 - For indexers behind Cloudflare, route traffic through FlareSolverr and consider proxying through VPN if allowed by provider.
 - Enforce `umask` and `setgid` on download directories to avoid permission leaks.
+- If you use Tailscale, prefer limiting admin surfaces (Sonarr/Radarr/NPM/Traefik) to Tailscale IPs or add proxy-layer allowlists so only your tailnet can reach them.
