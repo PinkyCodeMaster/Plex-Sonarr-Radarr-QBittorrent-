@@ -7,6 +7,7 @@ Infrastructure-as-code and container orchestration scaffolding for a self-hosted
 - `infra/`: Terraform (cloud primitives) and Ansible (host config) baselines.
 - `services/`: Service-specific notes (e.g., `services/indexer`).
 - `docs/`: Security, workflows, and operations guidance.
+- `docs/deployment.md`: How to run locally (CPU-only or with GPU) or on cloud with cost controls.
 - `scripts/`: Bootstrap, lifecycle, validation, backup, and post-download helpers.
 - `compose/npm-proxy.yml`: Optional Nginx Proxy Manager bundle (for Cloudflare/NPM users).
 
@@ -23,6 +24,11 @@ Infrastructure-as-code and container orchestration scaffolding for a self-hosted
 - **Traefik** (compose/proxy.yml): automatic TLS via Let’s Encrypt; add your htpasswd hash in `compose/traefik/dynamic.yml`. If using Cloudflare, you can switch to DNS-01 with `CLOUDFLARE_API_TOKEN` (see `docs/proxy.md`).
 - **Nginx Proxy Manager** (compose/npm-proxy.yml): web UI on port 81, works well with Cloudflare HTTP-01 or DNS; configure proxy hosts pointing at service names on the `edge` network. See `docs/proxy.md` for steps.
 - **Tailscale users**: You can restrict admin surfaces to tailnet IPs via Traefik middleware or NPM access lists; you may also keep 80/443 closed publicly and reach services over Tailscale.
+
+## Deployment profiles
+- **Local CPU-only (default)**: run the stack as-is; leave `/dev/dri` in place or remove it if your host has no iGPU. See `docs/deployment.md`.
+- **Local with GPU**: enable Intel Quick Sync (already mapped) or add NVIDIA runtime/env vars if you install `nvidia-container-toolkit`. See `docs/deployment.md`.
+- **Cloud (AWS/Azure/GCP)**: start with small CPU instances, attach a single data volume for `/data`, keep qBittorrent on VPN, and only expose 80/443. See `docs/deployment.md` for cost tips.
 
 ## Notes
 - qBittorrent is pinned to the VPN container via `network_mode: service:vpn`.
