@@ -1,0 +1,24 @@
+http:
+  middlewares:
+    secure-headers:
+      headers:
+        frameDeny: true
+        sslRedirect: true
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
+        referrerPolicy: no-referrer-when-downgrade
+        contentTypeNosniff: true
+        browserXssFilter: true
+    basic-auth:
+      basicAuth:
+        users:
+          - "admin:replace-with-htpasswd-hash"
+    auth-chain:
+      chain:
+        middlewares:
+          - basic-auth
+          - secure-headers
+    default-security:
+      chain:
+        middlewares:
+          - secure-headers
