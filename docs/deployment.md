@@ -29,3 +29,14 @@
 - Avoid unnecessary GPU spend unless you truly need hardware transcodes.
 - Schedule backups to cheap object storage with lifecycle rules; delete old archives automatically.
 - Keep logs rotated to prevent storage bloat.
+
+## Hosting options (starting points)
+- Home lab (recommended for $0 infra): any Linux box with Docker; Tailscale for secure remote access.
+- Hetzner CX/ARM or OVH/SYS budget servers: low-cost dedicated/VPS with predictable bandwidth pricing.
+- AWS EC2: start with t4g/small instances; attach one EBS volume for `/data`. https://aws.amazon.com/ec2/
+- Azure VMs: use B-series for burstable CPU and a single Premium SSD for `/data`. https://azure.microsoft.com/en-us/products/virtual-machines
+- GCP Compute Engine: e2-standard/small with a single Persistent Disk for `/data`. https://cloud.google.com/compute
+- DigitalOcean/Linode/Vultr: basic shared CPU droplet/instance with block storage for `/data` if needed. https://www.digitalocean.com/ || https://www.linode.com/ || https://www.vultr.com/
+
+## Plex Pass (optional)
+Plex hardware transcoding and some mobile features may require Plex Pass. The stack runs without it in software mode. More info: https://www.plex.tv/plex-pass/
