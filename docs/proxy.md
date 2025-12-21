@@ -11,12 +11,12 @@
   1. Point Cloudflare DNS A/AAAA records for your media subdomains at your server. Disable orange-cloud proxy during initial issuance if using HTTP challenge.
   2. Start the media stack first to create the shared `edge`/`media` networks: `docker compose -f compose/media-stack.yml --env-file .env up -d`.
   3. Start NPM: `docker compose -f compose/media-stack.yml -f compose/npm-proxy.yml --env-file .env up -d npm` (or omit if already running).
-  3. Login to NPM UI (default admin email from `.env`): `https://<server>:81` (set a strong password and enable 2FA).
-  4. Create Proxy Hosts for `plex`, `sonarr`, `radarr`, `prowlarr` pointing to the container on the `edge` network:
+  4. Login to NPM UI (default admin email from `.env`; initial credentials are admin@example.com/changeme unless overridden): `https://<server>:81` (set a strong password and enable 2FA).
+  5. Create Proxy Hosts for `plex`, `sonarr`, `radarr`, `prowlarr` pointing to the container on the `edge` network:
      - Forward hostname: service name (e.g., `sonarr`), scheme `http`, port (8989 Sonarr, 7878 Radarr, 9696 Prowlarr, 32400 Plex).
      - Access Lists / Auth: optional; recommended for admin surfaces.
      - SSL: Request a new cert via Let’s Encrypt; supply email; enable HTTP/2, HSTS, and Force SSL.
-  5. Re-enable Cloudflare orange-cloud after cert issuance if desired.
+  6. Re-enable Cloudflare orange-cloud after cert issuance if desired.
 
 ## Tailscale considerations
 - You can restrict admin access to Tailscale IPs by adding NPM access lists or Traefik middleware rules that only allow `100.x.y.z/10` addresses.
