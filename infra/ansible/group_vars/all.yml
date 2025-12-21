@@ -1,0 +1,10 @@
+---
+media_user: media
+media_group: media
+media_uid: 1000
+media_gid: 1000
+hostname: media.example.com
+packages:
+  - docker.io
+  - docker-compose-plugin
+  - wireguard

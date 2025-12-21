@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  npm:
+    image: jc21/nginx-proxy-manager:2.11.3
+    container_name: npm
+    ports:
+      - "80:80"
+      - "443:443"
+      - "81:81"
+    environment:
+      DB_SQLITE_FILE: "/data/database.sqlite"
+      DISABLE_IPV6: "true"
+      FORCE_COLOR: "1"
+      # Admin bootstrap email/password are set via the UI; email is referenced from .env for documentation
+      # NPM_ADMIN_EMAIL: ${NPM_ADMIN_EMAIL}
+    volumes:
+      - ${CONFIG_ROOT:-/data/config}/npm/data:/data
+      - ${CONFIG_ROOT:-/data/config}/npm/letsencrypt:/etc/letsencrypt
+    restart: unless-stopped
+    networks:
+      - edge
+      - media
+
+networks:
+  media:
+    external: true
+  edge:
+    external: true
